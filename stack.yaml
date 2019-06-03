@@ -32,6 +32,8 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Aliases:
+          - 'example.melvyn.dev'
         DefaultRootObject: 'index.html'
         Enabled: true
         PriceClass: 'PriceClass_100'
