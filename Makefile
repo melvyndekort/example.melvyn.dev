@@ -1,8 +1,10 @@
+include envfile
+
 cf-create:
-	aws cloudformation create-stack --stack-name example --template-body file://stack.yaml
+	aws cloudformation create-stack --stack-name example --template-body file://stack.yaml --parameters "ParameterKey=CustomDomainParameter,ParameterValue=${DOMAIN}" "ParameterKey=CertificateARNParameter,ParameterValue=${CERTARN}"
 
 cf-update:
-	aws cloudformation update-stack --stack-name example --template-body file://stack.yaml
+	aws cloudformation update-stack --stack-name example --template-body file://stack.yaml --parameters "ParameterKey=CustomDomainParameter,ParameterValue=${DOMAIN}" "ParameterKey=CertificateARNParameter,ParameterValue=${CERTARN}"
 
 cf-delete:
 	aws cloudformation delete-stack --stack-name example

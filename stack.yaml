@@ -1,5 +1,18 @@
 AWSTemplateFormatVersion: 2010-09-09
 
+Parameters:
+  CustomDomainParameter:
+    Type: 'String'
+    Description: 'Enter the domain name where you want to host the distribution.'
+  CertificateARNParameter:
+    Type: 'String'
+    Description: 'Enter the ARN of a certificate in region us-east-1.'
+
+Outputs:
+  DomainName:
+    Description: 'The domain name where the distribution can be reached.'
+    Value: !GetAtt ExampleDistribution.DomainName
+
 Resources:
   ExampleIdentity:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
@@ -10,7 +23,8 @@ Resources:
   ExampleBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: 'example.melvyn.dev'
+      BucketName:
+        Ref: CustomDomainParameter
       AccessControl: 'Private'
 
   ExampleBucketPolicy:
@@ -33,13 +47,17 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
-          - 'example.melvyn.dev'
+          - Ref: CustomDomainParameter
         DefaultRootObject: 'index.html'
         Enabled: true
         PriceClass: 'PriceClass_100'
+        HttpVersion: 'http2'
 
         ViewerCertificate:
-          CloudFrontDefaultCertificate: true
+          AcmCertificateArn:
+            Ref: CertificateARNParameter
+          MinimumProtocolVersion: 'TLSv1.1_2016'
+          SslSupportMethod: 'sni-only'
 
         Origins:
           - DomainName: !GetAtt ExampleBucket.DomainName
