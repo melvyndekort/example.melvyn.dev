@@ -23,12 +23,14 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script type="text/javascript">
-    function logout() {
-      document.cookie = "CloudFront-Key-Pair-Id= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-      document.cookie = "CloudFront-Policy= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-      document.cookie = "CloudFront-Signature= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-      window.location.href = "https://melvyn.eu.auth0.com/v2/logout?client_id=dAfGofv9oafbDcTmAueLBIFB61S46el6&returnTo=https://example.melvyn.dev";
-    }
+    window.onload = function () {
+      document.getElementById("logout").onclick = function () {
+        document.cookie = "CloudFront-Key-Pair-Id= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie = "CloudFront-Policy= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie = "CloudFront-Signature= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+        window.location.href = "https://melvyn.eu.auth0.com/v2/logout?client_id=dAfGofv9oafbDcTmAueLBIFB61S46el6&returnTo=https://example.melvyn.dev";
+      };
+    };
   </script>
 
   <title>Example</title>
@@ -37,7 +39,7 @@
 <body>
   <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Melvyn.dev</a>
-    <button id="logout" class="btn btn-warning" onclick="logout()">Log out</button>
+    <button id="logout" class="btn btn-warning">Log out</button>
   </nav>
   <main>
     <div class="container-fluid">
