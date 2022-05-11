@@ -14,4 +14,4 @@ apply:
 	@cd terraform; terraform init; terraform apply
 
 deploy:
-	@cd src; aws s3 sync --delete . s3://example.melvyn.dev
+	@aws s3 sync --delete src s3://example.melvyn.dev

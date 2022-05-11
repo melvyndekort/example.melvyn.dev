@@ -34,5 +34,5 @@ function setCookies(responseText) {
   }
 }
 
-var APIURL = 'https://api.mdekort.nl/auth?id_token=' + getToken();
+var APIURL = 'https://api.melvyn.dev/auth?id_token=' + getToken();
 httpGetAsync(APIURL, setCookies);
