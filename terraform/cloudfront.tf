@@ -81,6 +81,12 @@ resource "aws_cloudfront_distribution" "example" {
     cached_methods  = ["GET", "HEAD"]
   }
 
+  logging_config {
+    bucket          = aws_s3_bucket.access_logs.bucket_domain_name
+    include_cookies = true
+    prefix          = "${aws_acm_certificate.example.domain_name}/"
+  }
+
   custom_error_response {
     error_caching_min_ttl = 0
     error_code            = 403

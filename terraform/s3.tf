@@ -32,3 +32,28 @@ resource "aws_s3_bucket_public_access_block" "example" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+data "aws_cloudfront_log_delivery_canonical_user_id" "current" {}
+data "aws_canonical_user_id" "current" {}
+
+resource "aws_s3_bucket" "access_logs" {
+  bucket = "mdekort.accesslogs"
+}
+
+resource "aws_s3_bucket_acl" "access_logs" {
+  bucket = aws_s3_bucket.access_logs.id
+
+  access_control_policy {
+    grant {
+      grantee {
+        id   = data.aws_cloudfront_log_delivery_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
+  }
+}
