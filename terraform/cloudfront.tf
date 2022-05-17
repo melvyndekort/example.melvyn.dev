@@ -3,25 +3,15 @@ resource "aws_cloudfront_origin_access_identity" "example" {
 }
 
 resource "aws_cloudfront_public_key" "example" {
-  comment     = "Public key for example.melvyn.dev"
-  encoded_key = <<EOF
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsxmpLgMJnOOzyf0INJVk
-+1ryc2iwi+3TVcUWE1oFT4yniLoI4Ud7Vh9zLXXTSiUOuEkN9Gqe3jIxrjcxToxl
-f7IhvVWflTWVyFkkHlfG39ODZYNyo3xrUbOD9dZUBEsyIF7Z+M7R8ueFuZqylIZV
-sk22gVwZVXurPqWdny7jIbytY0fnaO+R1AyQcCVwncI+6eZmv0OD3d3mWJpSjXhc
-2WmqUKVZt+dOudlaFXxqjY9bKjqW4Xbh04+zJlfNG//1DVzamXkDufnitI4bA0Q2
-BsIs9oKWU2htUauDAkYQamwDrJEdbFwjrx8y1kmLoO9zDhrmTRUWPKwdpVLLnwTK
-aQIDAQAB
------END PUBLIC KEY-----
-EOF
   name        = "example-melvyn-dev"
+  comment     = "Public key for example.melvyn.dev"
+  encoded_key = var.cloudfront_public_key
 }
 
 resource "aws_cloudfront_key_group" "example" {
+  name    = "example-melvyn-dev"
   comment = "Key group for example.melvyn.dev"
   items   = [aws_cloudfront_public_key.example.id]
-  name    = "example-melvyn-dev"
 }
 
 data "aws_cloudfront_cache_policy" "caching_disabled" {
