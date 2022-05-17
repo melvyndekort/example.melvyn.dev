@@ -104,7 +104,7 @@ resource "aws_cloudfront_distribution" "example" {
   }
 
   logging_config {
-    bucket          = aws_s3_bucket.access_logs.bucket_domain_name
+    bucket          = data.aws_s3_bucket.access_logs.bucket_domain_name
     include_cookies = true
     prefix          = "${aws_acm_certificate.example.domain_name}/"
   }

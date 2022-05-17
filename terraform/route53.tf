@@ -37,7 +37,7 @@ resource "aws_acm_certificate_validation" "example" {
   validation_record_fqdns = [for record in aws_route53_record.example_cert_validate : record.fqdn]
 }
 
-resource "aws_route53_record" "example-a" {
+resource "aws_route53_record" "example_a" {
   name    = aws_acm_certificate.example.domain_name
   type    = "A"
   zone_id = data.aws_route53_zone.melvyn_dev.zone_id
@@ -49,7 +49,7 @@ resource "aws_route53_record" "example-a" {
   }
 }
 
-resource "aws_route53_record" "example-aaaa" {
+resource "aws_route53_record" "example_aaaa" {
   name    = aws_acm_certificate.example.domain_name
   type    = "AAAA"
   zone_id = data.aws_route53_zone.melvyn_dev.zone_id
