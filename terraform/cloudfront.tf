@@ -2,16 +2,10 @@ resource "aws_cloudfront_origin_access_identity" "example" {
   comment = "Identity for example.melvyn.dev"
 }
 
-resource "aws_cloudfront_public_key" "example" {
-  name        = "example-melvyn-dev"
-  comment     = "Public key for example.melvyn.dev"
-  encoded_key = var.cloudfront_public_key
-}
-
 resource "aws_cloudfront_key_group" "example" {
   name    = "example-melvyn-dev"
   comment = "Key group for example.melvyn.dev"
-  items   = [aws_cloudfront_public_key.example.id]
+  items   = [data.terraform_remote_state.convert_jwt.outputs.public_key_id]
 }
 
 data "aws_cloudfront_cache_policy" "caching_disabled" {

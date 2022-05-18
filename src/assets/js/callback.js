@@ -21,7 +21,7 @@ function httpGetAsync(endpoint, callback) {
 function setCookies(responseText) {
   try {
     cookieObject = JSON.parse(responseText);
-    expiration = '; Expires=' + new Date(cookieObject.Expiration*1000).toUTCString() + "; ";
+    expiration = '; Expires=' + new Date(cookieObject.Expiration).toUTCString() + "; ";
     staticInfo = '; Path=/; Secure';
 
     document.cookie = 'CloudFront-Policy=' + cookieObject.Policy + expiration + staticInfo;
@@ -34,5 +34,5 @@ function setCookies(responseText) {
   }
 }
 
-var APIURL = 'https://api.melvyn.dev/auth?id_token=' + getToken();
+var APIURL = 'https://api.mdekort.nl/cookies?id_token=' + getToken();
 httpGetAsync(APIURL, setCookies);
