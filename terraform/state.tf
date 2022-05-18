@@ -12,8 +12,8 @@ data "terraform_remote_state" "convert_jwt" {
   backend = "s3"
 
   config = {
-    bucket   = "mdekort.tfstate"
-    key      = "convert-jwt.tfstate"
-    region   = "eu-west-1"
+    bucket = "mdekort.tfstate"
+    key    = "convert-jwt.tfstate"
+    region = "eu-west-1"
   }
 }
