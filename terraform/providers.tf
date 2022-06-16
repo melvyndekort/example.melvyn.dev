@@ -21,6 +21,5 @@ provider "aws" {
 }
 
 provider "cloudflare" {
-  email   = local.secrets.cloudflare.email
-  api_key = local.secrets.cloudflare.api_key
+  api_token = data.terraform_remote_state.cloudsetup.outputs.api_token_example
 }
