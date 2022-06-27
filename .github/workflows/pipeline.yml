@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /terraform
+        working-directory: terraform
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -100,5 +100,5 @@ jobs:
 
       - name: AWS S3 sync
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        working-directory: /src
+        working-directory: src
         run: aws s3 sync --delete . s3://example.melvyn.dev
