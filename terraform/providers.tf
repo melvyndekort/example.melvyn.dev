@@ -1,4 +1,12 @@
 terraform {
+  cloud {
+    organization = "melvyndekort"
+
+    workspaces {
+      name = "example-melvyn-dev"
+    }
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
