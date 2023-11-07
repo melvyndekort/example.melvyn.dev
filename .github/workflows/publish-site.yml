@@ -1,0 +1,27 @@
+name: 'Publish site'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    needs: terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-1
+          role-to-assume: arn:aws:iam::075673041815:role/external/deployer
+      - name: AWS S3 sync
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: aws s3 sync --delete src s3://example.melvyn.dev

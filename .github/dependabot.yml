@@ -10,11 +10,11 @@ updates:
       - "melvyndekort"
     reviewers:
       - "melvyndekort"
-  # Maintain dependencies for Docker
-  - package-ecosystem: "docker"
-    directory: "/"
+  # Maintain dependencies for Terraform
+  - package-ecosystem: "terraform"
+    directory: "/terraform"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     assignees:
       - "melvyndekort"
     reviewers:
