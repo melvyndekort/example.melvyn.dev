@@ -1,9 +1,9 @@
-data "terraform_remote_state" "convert_jwt" {
+data "terraform_remote_state" "get_cookies" {
   backend = "s3"
 
   config = {
     bucket = "mdekort.tfstate"
-    key    = "convert-jwt.tfstate"
+    key    = "get-cookies.tfstate"
     region = "eu-west-1"
   }
 }

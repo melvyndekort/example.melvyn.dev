@@ -5,7 +5,7 @@ resource "aws_cloudfront_origin_access_identity" "example" {
 resource "aws_cloudfront_key_group" "example" {
   name    = "example-melvyn-dev"
   comment = "Key group for example.melvyn.dev"
-  items   = [data.terraform_remote_state.convert_jwt.outputs.public_key_id]
+  items   = [data.terraform_remote_state.get_cookies.outputs.public_key_id]
 }
 
 data "aws_cloudfront_cache_policy" "caching_disabled" {
