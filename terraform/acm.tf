@@ -9,7 +9,7 @@ resource "aws_acm_certificate" "example" {
   }
 }
 
-resource "cloudflare_record" "example_cert_validate" {
+resource "cloudflare_dns_record" "example_cert_validate" {
   for_each = {
     for dvo in aws_acm_certificate.example.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
@@ -18,16 +18,16 @@ resource "cloudflare_record" "example_cert_validate" {
     }
   }
 
-  zone_id = data.cloudflare_zone.melvyn_dev.id
-  name    = each.value.name
+  zone_id = data.terraform_remote_state.tf_cloudflare.outputs.melvyn_dev_zone_id
+  name    = trim(each.value.name, ".")
   type    = each.value.type
   ttl     = 60
-  value   = each.value.record
+  content = trim(each.value.record, ".")
 }
 
 resource "aws_acm_certificate_validation" "example" {
   provider = aws.useast1
 
   certificate_arn         = aws_acm_certificate.example.arn
-  validation_record_fqdns = [for record in cloudflare_record.example_cert_validate : record.hostname]
+  validation_record_fqdns = [for record in cloudflare_dns_record.example_cert_validate : record.name]
 }

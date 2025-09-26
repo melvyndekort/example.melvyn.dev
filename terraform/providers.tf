@@ -29,5 +29,5 @@ provider "aws" {
 }
 
 provider "cloudflare" {
-  api_token = data.terraform_remote_state.cloudsetup.outputs.api_token_example
+  api_token = data.terraform_remote_state.tf_cloudflare.outputs.api_token_example
 }

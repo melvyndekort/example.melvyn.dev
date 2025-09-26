@@ -34,5 +34,5 @@ resource "aws_s3_bucket_public_access_block" "example" {
 }
 
 data "aws_s3_bucket" "access_logs" {
-  bucket = "mdekort.accesslogs"
+  bucket = data.terraform_remote_state.tf_aws.outputs.access_logs_bucket
 }
