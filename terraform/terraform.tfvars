@@ -1,3 +1,3 @@
 aws_region           = "eu-west-1"
 aws_region_secondary = "us-east-1"
-tfstate_bucket       = "mdekort.tfstate"
+tfstate_bucket       = "mdekort-tfstate-075673041815"
