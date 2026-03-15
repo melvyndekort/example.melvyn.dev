@@ -8,7 +8,3 @@ variable "aws_region_secondary" {
   type        = string
 }
 
-variable "tfstate_bucket" {
-  description = "S3 bucket for Terraform state"
-  type        = string
-}
