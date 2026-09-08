@@ -21,6 +21,9 @@ Example static website hosted on S3 with CloudFront CDN. Uses dual AWS regions (
 - Backend: S3 key `example-melvyn-dev.tfstate` in `mdekort-tfstate-075673041815`
 - Providers: AWS (two regions), Cloudflare
 - Uses `useast1` provider alias for ACM certificates
+- **Still in the management account.** Priority 4 subaccount migration
+  candidate, paired with `startpage` into one shared "static-web" account —
+  see `~/.claude/references/subaccount-migration.md`.
 
 ## Related Repositories
 
