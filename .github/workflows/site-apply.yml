@@ -6,16 +6,16 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/publish-site.yml'
+      - '.github/workflows/site-apply.yml'
       - 'src/**'
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+    environment: production
     permissions:
       id-token: write
       contents: read
-      pull-requests: write
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
